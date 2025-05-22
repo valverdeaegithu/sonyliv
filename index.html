@@ -1,0 +1,159 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta name="description" content="Watch live sports events on SonyLiv" />
+  <title>SonyLIV Live Events</title>
+  <link rel="shortcut icon" href="data:image/png;base64,..." />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #2563eb;
+      --secondary: #1e40af;
+      --accent: #ff4500;
+    }
+
+    body {
+      background: #121212;
+      color: #ffffff;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+    }
+
+    .match-card {
+      transition: transform 0.3s, box-shadow 0.3s, opacity 0.3s;
+      background: linear-gradient(145deg, #1a1a1a, #2d2d2d);
+    }
+
+    .match-card:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .live-border {
+      border: 3px solid var(--accent);
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .live-pulse {
+      animation: pulse 2s infinite;
+    }
+
+    .gradient-text {
+      background: linear-gradient(45deg, #ff6b6b, #ff4500);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+  </style>
+</head>
+<body class="bg-dark">
+
+  <nav class="bg-black/80 backdrop-blur-md sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <img src="https://images.slivcdn.com/UI_icons/sonyliv_new_revised_header_logo.png" alt="Logo" class="w-8 h-8 rounded" />
+        <h1 class="text-xl font-bold gradient-text">SonyLIV Events</h1>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container mx-auto px-4 py-8" id="matches-container">
+    <!-- Matches will be injected here -->
+  </main>
+
+  <button id="backToTop" class="fixed bottom-8 right-8 w-12 h-12 bg-blue-600/80 hover:bg-blue-700 text-white rounded-full shadow-lg backdrop-blur-sm transition-all opacity-0 invisible" aria-label="Back to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <script>
+    const container = document.getElementById('matches-container');
+
+    fetch('https://raw.githubusercontent.com/drmlive/sliv-live-events/main/sonyliv.json')
+      .then(response => response.json())
+      .then(data => {
+        if (!data.matches || data.matches.length === 0) {
+          container.innerHTML = `
+            <div class="text-center py-20 space-y-4">
+              <div class="text-6xl text-gray-500"><i class="fas fa-frown"></i></div>
+              <h2 class="text-2xl text-gray-300">No matches available</h2>
+              <p class="text-gray-500">Please check back later</p>
+            </div>`;
+          return;
+        }
+
+        const cards = data.matches.map(match => `
+  <article class="match-card rounded-xl overflow-hidden relative ${match.isLive ? 'live-border' : ''}">
+    <div class="relative aspect-video">
+      <img src="${match.src}" alt="${match.event_name}" class="w-full h-full object-cover" loading="lazy">
+    </div>
+    <div class="p-4 space-y-3">
+      <div class="flex flex-wrap gap-2">
+        ${match.isLive ? `
+          <span class="px-3 py-1 bg-red-600 text-white text-xs rounded-full flex items-center space-x-1.5">
+            <span class="live-pulse w-2 h-2 bg-white rounded-full"></span>
+            <span>LIVE</span>
+          </span>` : ''}
+        <span class="px-3 py-1 bg-gray-800 text-gray-300 text-xs rounded-full">${match.event_category}</span>
+        <span class="px-3 py-1 bg-gray-800 text-gray-300 text-xs rounded-full">${match.audioLanguageName}</span>
+      </div>
+      <div class="space-y-2">
+        <h2 class="text-xl font-bold text-gray-100 truncate">${match.event_name}</h2>
+        <p class="text-sm text-gray-400">${match.match_name}</p>
+        <div class="flex items-center text-sm text-gray-400 space-x-2">
+          <i class="fas fa-tv"></i>
+          <span>${match.broadcast_channel}</span>
+        </div>
+      </div>
+      <div class="pt-4">
+        ${match.isLive ? `
+          <a href="/play.html?id=${match.contentId}" class="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 py-3 rounded-lg font-medium transition-all transform hover:scale-[1.02]">
+  <i class="fas fa-play"></i><span>Watch Live</span>
+</a>` : `
+          <div class="relative group">
+            <button class="w-full flex items-center justify-center space-x-2 bg-gray-700/50 text-gray-400 px-6 py-3 rounded-lg font-medium cursor-not-allowed" disabled>
+              <i class="far fa-clock"></i><span>Event Not Started</span>
+            </button>
+            <div class="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm"></div>
+          </div>`}
+      </div>
+    </div>
+  </article>
+`).join('');
+
+
+        container.innerHTML = `<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">${cards}</div>`;
+      })
+      .catch(err => {
+        console.error('Failed to fetch match data:', err);
+        container.innerHTML = `
+          <div class="text-center py-20 space-y-4">
+            <div class="text-6xl text-gray-500"><i class="fas fa-exclamation-triangle"></i></div>
+            <h2 class="text-2xl text-gray-300">Error loading data</h2>
+            <p class="text-gray-500">Please try again later</p>
+          </div>`;
+      });
+
+    // Back to Top Button
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTop.classList.remove('opacity-0', 'invisible');
+        backToTop.classList.add('opacity-100', 'visible');
+      } else {
+        backToTop.classList.remove('opacity-100', 'visible');
+        backToTop.classList.add('opacity-0', 'invisible');
+      }
+    });
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+</body>
+</html>
