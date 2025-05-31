@@ -1,158 +1,274 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
-  <meta name="description" content="Watch live sports events on SonyLiv" />
-  <title>SonyLIV Live Events</title>
-  <link rel="shortcut icon" href="data:image/png;base64,..." />
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Enjoy all SonyLiv live matches and events absolutely free in stunning FHD quality. Valverdeae brings you nonstop sports entertainment!">
+  <title>SonyLiv Sports Live Streaming Free | Watch on @matcheslinks</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#0f172a',
+            secondary: '#1e293b',
+            accent: '#3b82f6',
+            'accent-hover': '#2563eb',
+          },
+          fontSize: {
+            'xxs': '0.625rem',
+          }
+        }
+      }
+    }
+  </script>
   <style>
-    :root {
-      --primary: #2563eb;
-      --secondary: #1e40af;
-      --accent: #ff4500;
-    }
-
-    body {
-      background: #121212;
-      color: #ffffff;
-      font-family: 'Segoe UI', system-ui, sans-serif;
-    }
-
-    .match-card {
-      transition: transform 0.3s, box-shadow 0.3s, opacity 0.3s;
-      background: linear-gradient(145deg, #1a1a1a, #2d2d2d);
-    }
-
-    .match-card:hover {
-      transform: translateY(-5px) scale(1.02);
-      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
-    }
-
-    .live-border {
-      border: 3px solid var(--accent);
-    }
-
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.5; }
-    }
-
-    .live-pulse {
-      animation: pulse 2s infinite;
-    }
-
     .gradient-text {
-      background: linear-gradient(45deg, #ff6b6b, #ff4500);
+      background: linear-gradient(90deg, #3b82f6, #ec4899);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
     }
+    /* Mobile-first card hover */
+    @media (hover: hover) {
+      .card-hover {
+        transition: all 0.3s ease;
+      }
+      .card-hover:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px -5px rgba(0, 0, 0, 0.2);
+      }
+    }
+    .live-badge {
+      position: relative;
+      overflow: hidden;
+    }
+    .live-badge::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(239, 68, 68, 0.2);
+      animation: pulse 2s infinite;
+      border-radius: 9999px;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    /* Mobile menu animation */
+    .mobile-menu {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease-out;
+    }
+    .mobile-menu.open {
+      max-height: 500px;
+    }
   </style>
 </head>
-<body class="bg-dark">
 
-  <nav class="bg-black/80 backdrop-blur-md sticky top-0 z-50">
-    <div class="container mx-auto px-4 py-3 flex items-center justify-between">
-      <div class="flex items-center space-x-3">
-        <img src="https://images.slivcdn.com/UI_icons/sonyliv_new_revised_header_logo.png" alt="Logo" class="w-8 h-8 rounded" />
-        <h1 class="text-xl font-bold gradient-text">SonyLIV Events</h1>
+<body class="bg-primary text-white min-h-screen font-sans antialiased">
+  <div class="relative z-10">
+    <!-- Mobile-friendly header -->
+    <header class="sticky top-0 z-50 bg-primary/90 backdrop-blur-sm py-4 px-4 shadow-sm">
+      <div class="flex justify-between items-center max-w-7xl mx-auto">
+        <div class="flex items-center space-x-2">
+          <i class="fas fa-play-circle text-accent text-2xl"></i>
+          <h1 class="text-xl font-bold">Valverdeae<span class="gradient-text">Stream</span></h1>
+        </div>
+        
+        <!-- Desktop nav (hidden on mobile) -->
+        <nav class="hidden md:flex space-x-4 lg:space-x-6">
+          <a href="#" class="text-gray-300 hover:text-white transition text-sm lg:text-base">Home</a>
+          <a href="#" class="text-gray-300 hover:text-white transition text-sm lg:text-base">Sports</a>
+          <a href="#" class="text-gray-300 hover:text-white transition text-sm lg:text-base">Live</a>
+          <a href="#" class="text-gray-300 hover:text-white transition text-sm lg:text-base">Channels</a>
+        </nav>
+        
+        <!-- Mobile menu button -->
+        <button id="menuToggle" class="md:hidden text-gray-300 hover:text-white focus:outline-none">
+          <i class="fas fa-bars text-xl"></i>
+        </button>
       </div>
-    </div>
-  </nav>
-
-  <main class="container mx-auto px-4 py-8" id="matches-container">
-    <!-- Matches will be injected here -->
-  </main>
-
-  <button id="backToTop" class="fixed bottom-8 right-8 w-12 h-12 bg-blue-600/80 hover:bg-blue-700 text-white rounded-full shadow-lg backdrop-blur-sm transition-all opacity-0 invisible" aria-label="Back to top">
-    <i class="fas fa-arrow-up"></i>
-  </button>
-
-  <script>
-    const container = document.getElementById('matches-container');
-
-    fetch('https://raw.githubusercontent.com/drmlive/sliv-live-events/main/sonyliv.json')
-      .then(response => response.json())
-      .then(data => {
-        if (!data.matches || data.matches.length === 0) {
-          container.innerHTML = `
-            <div class="text-center py-20 space-y-4">
-              <div class="text-6xl text-gray-500"><i class="fas fa-frown"></i></div>
-              <h2 class="text-2xl text-gray-300">No matches available</h2>
-              <p class="text-gray-500">Please check back later</p>
-            </div>`;
-          return;
-        }
-
-        const cards = data.matches.map(match => `
-  <article class="match-card rounded-xl overflow-hidden relative ${match.isLive ? 'live-border' : ''}">
-    <div class="relative aspect-video">
-      <img src="${match.src}" alt="${match.event_name}" class="w-full h-full object-cover" loading="lazy">
-    </div>
-    <div class="p-4 space-y-3">
-      <div class="flex flex-wrap gap-2">
-        ${match.isLive ? `
-          <span class="px-3 py-1 bg-red-600 text-white text-xs rounded-full flex items-center space-x-1.5">
-            <span class="live-pulse w-2 h-2 bg-white rounded-full"></span>
-            <span>LIVE</span>
-          </span>` : ''}
-        <span class="px-3 py-1 bg-gray-800 text-gray-300 text-xs rounded-full">${match.event_category}</span>
-        <span class="px-3 py-1 bg-gray-800 text-gray-300 text-xs rounded-full">${match.audioLanguageName}</span>
-      </div>
-      <div class="space-y-2">
-        <h2 class="text-xl font-bold text-gray-100 truncate">${match.event_name}</h2>
-        <p class="text-sm text-gray-400">${match.match_name}</p>
-        <div class="flex items-center text-sm text-gray-400 space-x-2">
-          <i class="fas fa-tv"></i>
-          <span>${match.broadcast_channel}</span>
+      
+      <!-- Mobile menu (hidden by default) -->
+      <div id="mobileMenu" class="mobile-menu md:hidden bg-secondary mt-2 rounded-lg">
+        <div class="flex flex-col space-y-2 p-4">
+          <a href="#" class="text-gray-300 hover:text-white transition py-2">Home</a>
+          <a href="#" class="text-gray-300 hover:text-white transition py-2">Sports</a>
+          <a href="#" class="text-gray-300 hover:text-white transition py-2">Live Events</a>
+          <a href="#" class="text-gray-300 hover:text-white transition py-2">Channels</a>
+          <a href="#" class="bg-accent text-white font-medium py-2 px-4 rounded-lg text-center mt-2">
+            <i class="fas fa-play mr-2"></i> Watch Now
+          </a>
         </div>
       </div>
-      <div class="pt-4">
-        ${match.isLive ? `
-          <a href="/play.html?id=${match.contentId}" class="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 py-3 rounded-lg font-medium transition-all transform hover:scale-[1.02]">
-  <i class="fas fa-play"></i><span>Watch Live</span>
-</a>` : `
-          <div class="relative group">
-            <button class="w-full flex items-center justify-center space-x-2 bg-gray-700/50 text-gray-400 px-6 py-3 rounded-lg font-medium cursor-not-allowed" disabled>
-              <i class="far fa-clock"></i><span>Event Not Started</span>
-            </button>
-            <div class="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm"></div>
-          </div>`}
+    </header>
+
+    <!-- Hero Section (optimized for mobile) -->
+    <section class="py-8 px-4 sm:px-6 max-w-7xl mx-auto text-center">
+      <h2 class="text-3xl sm:text-4xl font-extrabold mb-3">Live <span class="gradient-text">Sports Streaming</span></h2>
+      <p class="text-gray-300 text-base sm:text-lg max-w-2xl mx-auto mb-6">
+        Watch your favorite sports events in stunning FHD quality.
+      </p>
+      <div class="flex flex-col sm:flex-row justify-center space-y-3 sm:space-y-0 sm:space-x-4">
+        <a href="https://valverdeaegithu.github.io/Round-10---Honkook-Shanghai-E-Prix/" class="bg-accent hover:bg-accent-hover text-white px-6 py-3 rounded-full font-medium transition shadow-lg text-sm sm:text-base">
+          <i class="fas fa-play mr-2"></i> Watch Live
+        </a>
+        <button class="bg-secondary hover:bg-gray-700 text-white px-6 py-3 rounded-full font-medium transition text-sm sm:text-base">
+          <i class="fas fa-list mr-2"></i> All Events
+        </button>
       </div>
-    </div>
-  </article>
-`).join('');
+    </section>
 
+    <!-- Main Content -->
+    <main class="pb-8 px-4 sm:px-6 max-w-7xl mx-auto">
+      <!-- Featured Event (stacked on mobile) -->
+      <section class="mb-10">
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4">
+          <h3 class="text-xl font-bold flex items-center mb-2 sm:mb-0">
+            <span class="w-2 h-6 bg-accent rounded-full mr-3"></span>
+            Featured Live Event
+          </h3>
+          <div class="flex items-center text-xs sm:text-sm text-gray-400">
+            <span class="live-badge bg-red-600 text-white font-bold px-2 py-1 rounded-full mr-2">LIVE NOW</span>
+            <span>Updated just now</span>
+          </div>
+        </div>
 
-        container.innerHTML = `<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">${cards}</div>`;
-      })
-      .catch(err => {
-        console.error('Failed to fetch match data:', err);
-        container.innerHTML = `
-          <div class="text-center py-20 space-y-4">
-            <div class="text-6xl text-gray-500"><i class="fas fa-exclamation-triangle"></i></div>
-            <h2 class="text-2xl text-gray-300">Error loading data</h2>
-            <p class="text-gray-500">Please try again later</p>
-          </div>`;
-      });
+        <div class="relative rounded-xl overflow-hidden bg-gradient-to-r from-secondary to-gray-800 shadow-lg">
+          <div class="aspect-video overflow-hidden">
+            <img src="https://origin-staticv2.sonyliv.com/videoasset_images/manage_file/1000003306/1748594003176474_ABBFEWC25_Round10_Honkook_Shanghai_EPrix_Qualifying_Race_30may_landscape_thumb.jpg" 
+                 alt="Featured Event" 
+                 class="w-full h-full object-cover">
+          </div>
+          
+          <div class="relative z-20 p-4 sm:p-6">
+            <div class="flex items-center mb-3">
+              <span class="live-badge bg-red-600 text-white text-xxs sm:text-xs font-bold px-2 sm:px-3 py-1 rounded-full mr-2">LIVE</span>
+              <span class="text-xxs sm:text-xs text-gray-300">Formula E • Sony Sports Ten 1</span>
+            </div>
+            <h4 class="text-lg sm:text-xl font-bold mb-2">Round 10 - Honkook Shanghai E-Prix</h4>
+            <p class="text-gray-300 text-sm mb-4">Qualifying Race - ABB FIA Formula E World Championship 2024-25</p>
+            <div class="flex flex-wrap gap-2 mb-4">
+              <span class="bg-black/30 text-gray-300 px-2 py-1 rounded-full text-xxs sm:text-xs flex items-center">
+                <i class="fas fa-calendar-alt mr-1 text-xxs"></i> 31 May 2025
+              </span>
+              <span class="bg-black/30 text-gray-300 px-2 py-1 rounded-full text-xxs sm:text-xs flex items-center">
+                <i class="fas fa-clock mr-1 text-xxs"></i> 14:00 GMT
+              </span>
+            </div>
+            <a href="https://valverdeaegithu.github.io/Round-10---Honkook-Shanghai-E-Prix/" class="inline-flex items-center justify-center w-full sm:w-auto bg-accent hover:bg-accent-hover text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-medium transition text-sm sm:text-base">
+              <i class="fas fa-play mr-2"></i> Watch Live
+            </a>
+          </div>
+        </div>
+      </section>
 
-    // Back to Top Button
-    const backToTop = document.getElementById('backToTop');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 300) {
-        backToTop.classList.remove('opacity-0', 'invisible');
-        backToTop.classList.add('opacity-100', 'visible');
-      } else {
-        backToTop.classList.remove('opacity-100', 'visible');
-        backToTop.classList.add('opacity-0', 'invisible');
-      }
-    });
-    backToTop.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      <!-- All Live Events (single column on mobile) -->
+      <section>
+        <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4">
+          <h3 class="text-xl font-bold flex items-center mb-3 sm:mb-0">
+            <span class="w-2 h-6 bg-accent rounded-full mr-3"></span>
+            All Live Events
+          </h3>
+          <div class="flex space-x-3 w-full sm:w-auto justify-between sm:justify-start">
+            <button class="text-gray-400 hover:text-white transition flex items-center text-sm">
+              <i class="fas fa-filter mr-1"></i> Filter
+            </button>
+            <button class="text-gray-400 hover:text-white transition flex items-center text-sm">
+              <i class="fas fa-search mr-1"></i> Search
+            </button>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-6">
+          <!-- Event Card 1 -->
+          <div class="bg-secondary rounded-lg overflow-hidden shadow-md card-hover">
+            <div class="relative aspect-video overflow-hidden">
+              <img src="https://origin-staticv2.sonyliv.com/videoasset_images/manage_file/1000003306/1748594003176474_ABBFEWC25_Round10_Honkook_Shanghai_EPrix_Qualifying_Race_30may_landscape_thumb.jpg" 
+                   alt="Round 10 - Honkook Shanghai E-Prix" 
+                   class="w-full h-full object-cover">
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
+              <span class="live-badge absolute top-2 left-2 bg-red-600 text-white text-xxs font-bold px-2 py-0.5 rounded-full">LIVE</span>
+              <span class="absolute bottom-2 left-2 bg-black/70 text-white text-xxs font-medium px-1.5 py-0.5 rounded">
+                <i class="fas fa-tv mr-0.5"></i> Sony Ten 1
+              </span>
+            </div>
+
+            <div class="p-3">
+              <h4 class="font-bold mb-1 text-sm sm:text-base">Round 10 - Honkook Shanghai E-Prix</h4>
+              <p class="text-gray-400 text-xxs sm:text-xs mb-2">Qualifying Race - 31 May 2025</p>
+              
+              <div class="flex justify-between items-center">
+                <div class="flex items-center text-gray-500 text-xxs sm:text-xs">
+                  <i class="fas fa-users mr-1"></i>
+                  <span>1.4K</span>
+                </div>
+                <a href="https://valverdeaegithu.github.io/Round-10---Honkook-Shanghai-E-Prix/" class="text-accent hover:text-accent-hover font-medium flex items-center transition text-xxs sm:text-xs">
+                  Watch <i class="fas fa-arrow-right ml-1 text-xxs"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+
+    <!-- Footer (stacked on mobile) -->
+    <footer class="py-8 px-4 sm:px-6 border-t border-gray-800">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-7xl mx-auto">
+        <div class="col-span-2 md:col-span-1">
+          <h5 class="text-lg font-bold mb-3 flex items-center">
+            <i class="fas fa-play-circle text-accent mr-2"></i> Valverdetream
+          </h5>
+          <p class="text-gray-400 text-xs sm:text-sm">
+            High quality sports streaming, completely free.
+          </p>
+        </div>
+        <div>
+          <h5 class="text-sm font-bold mb-2">Sports</h5>
+          <ul class="space-y-1">
+            <li><a href="#" class="text-gray-400 hover:text-white transition text-xs sm:text-sm">Football</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition text-xs sm:text-sm">Cricket</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition text-xs sm:text-sm">Tennis</a></li>
+          </ul>
+        </div>
+        <div>
+          <h5 class="text-sm font-bold mb-2">Support</h5>
+          <ul class="space-y-1">
+            <li><a href="#" class="text-gray-400 hover:text-white transition text-xs sm:text-sm">Help Center</a></li>
+            <li><a href="#" class="text-gray-400 hover:text-white transition text-xs sm:text-sm">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="col-span-2 md:col-span-1">
+          <h5 class="text-sm font-bold mb-2">Connect</h5>
+          <div class="flex space-x-3">
+            <a href="#" class="text-gray-400 hover:text-white transition">
+              <i class="fab fa-facebook"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white transition">
+              <i class="fab fa-twitter"></i>
+            </a>
+            <a href="#" class="text-gray-400 hover:text-white transition">
+              <i class="fab fa-telegram"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="mt-8 pt-6 border-t border-gray-800 text-center text-gray-500 text-xxs sm:text-xs">
+        <p>© 2025 ValverdeStream. All rights reserved.</p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Mobile menu toggle script -->
+  <script>
+    document.getElementById('menuToggle').addEventListener('click', function() {
+      const menu = document.getElementById('mobileMenu');
+      menu.classList.toggle('open');
     });
   </script>
 </body>
