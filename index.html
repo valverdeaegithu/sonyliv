@@ -1,243 +1,164 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Enjoy all SonyLiv live matches and events absolutely free in stunning FHD quality. @matcheslinks brings you nonstop sports entertainment!">
-  <meta name="robots" content="index, follow">
-  <meta property="og:title" content="SonyLiv Sports Live Streaming Free | Watch on @matcheslinks">
-  <meta property="og:description" content="Enjoy all SonyLiv live matches and events absolutely free in stunning FHD quality. @matcheslinks brings you nonstop sports entertainment!">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://web.bgrid.in/sliv/">
-  <meta property="og:image" content="https://bitchv69.bgrid.in/img/sliv.webp">
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="SonyLiv Sports Live Streaming Free | Watch on @matcheslinks">
-  <meta name="twitter:description" content="Enjoy all SonyLiv live matches and events absolutely free in stunning FHD quality. @matcheslinks brings you nonstop sports entertainment!">
-  <link rel="canonical" href="https://web.bgrid.in/sliv/">
-  <title>SonyLiv Sports Live Streaming Free | Watch on @matcheslinks</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            primary: '#2563eb',
-            secondary: '#1e40af',
-            dark: '#0f172a',
-            darker: '#020617',
-          },
-          fontFamily: {
-            sans: ['Inter', 'sans-serif'],
-          },
-        }
-      }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta name="description" content="Watch live sports events on SonyLiv" />
+  <title>SonyLIV Live Events</title>
+  <link rel="shortcut icon" href="data:image/png;base64,..." />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet" />
+  <style>
+    :root {
+      --primary: #2563eb;
+      --secondary: #1e40af;
+      --accent: #ff4500;
     }
-  </script>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SportsEvent",
-    "name": "SonyLiv Sports Live Streaming Free | Watch on @matcheslinks",
-    "description": "Enjoy all SonyLiv live matches and events absolutely free in stunning FHD quality. @matcheslinks brings you nonstop sports entertainment!",
-    "startDate": "2025-05-31T10:37:06+00:00",
-    "location": {
-      "@type": "Place",
-      "name": "Colovray Sports Centre"
-    },
-    "eventAttendanceMode": "https://schema.org/MixedEventAttendanceMode",
-    "eventStatus": "https://schema.org/EventScheduled"
-  }
-  </script>
+
+    body {
+      background: #121212;
+      color: #ffffff;
+      font-family: 'Segoe UI', system-ui, sans-serif;
+    }
+
+    .match-card {
+      transition: transform 0.3s, box-shadow 0.3s, opacity 0.3s;
+      background: linear-gradient(145deg, #1a1a1a, #2d2d2d);
+    }
+
+    .match-card:hover {
+      transform: translateY(-5px) scale(1.02);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .live-border {
+      border: 3px solid var(--accent);
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .live-pulse {
+      animation: pulse 2s infinite;
+    }
+
+    .gradient-text {
+      background: linear-gradient(45deg, #ff6b6b, #ff4500);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+  </style>
 </head>
+<body class="bg-dark">
 
-<body class="bg-gradient-to-b from-darker via-dark to-darker text-white min-h-screen font-sans">
-  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-
-    <header class="text-center mb-12">
-      <h1 class="text-4xl md:text-5xl font-bold leading-tight bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-primary">
-        Live Sports Events
-      </h1>
-      <p class="text-gray-400 mt-3 text-lg max-w-2xl mx-auto">
-        Stream the best sports matches live in crystal clear HD quality
-      </p>
-      
-      <div class="mt-6 flex justify-center space-x-4">
-        <span class="inline-flex items-center px-3 py-1 rounded-full bg-red-900/30 text-red-400 text-sm font-medium">
-          <span class="w-2 h-2 mr-2 rounded-full bg-red-500 animate-pulse"></span>
-          LIVE NOW
-        </span>
-        <span class="inline-flex items-center px-3 py-1 rounded-full bg-gray-800 text-gray-300 text-sm font-medium">
-          2 events streaming
-        </span>
+  <nav class="bg-black/80 backdrop-blur-md sticky top-0 z-50">
+    <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+      <div class="flex items-center space-x-3">
+        <img src="https://images.slivcdn.com/UI_icons/sonyliv_new_revised_header_logo.png" alt="Logo" class="w-8 h-8 rounded" />
+        <h1 class="text-xl font-bold gradient-text">SonyLIV Events</h1>
       </div>
-    </header>
-
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-
-      <!-- Telegram Grid Card -->
-<div class="group relative flex flex-col rounded-xl overflow-hidden bg-gradient-to-br from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1">
-  <div class="flex-1 flex flex-col items-center justify-center p-6 text-center">
-    <div class="bg-white/20 p-3 rounded-full mb-4">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="currentColor" viewBox="0 0 24 24">
-        <path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.14.18-.357.295-.6.295-.002 0-.003 0-.005 0l.213-3.054 5.56-5.022c.24-.213-.054-.334-.373-.121l-6.869 4.326-2.96-.924c-.64-.203-.658-.64.135-.954l11.566-4.458c.538-.196 1.006.128.832.941z"/>
-      </svg>
     </div>
-    <h3 class="text-white text-xl font-bold mb-2">Join Our Telegram</h3>
-    <p class="text-blue-100 mb-4">Get instant notifications when live streams start</p>
-    <a href="https://t.me/matcheslinks" target="_blank" class="mt-auto bg-white text-blue-700 hover:bg-gray-100 font-medium py-2 px-6 rounded-full transition-colors duration-300">
-      @matcheslinks
-    </a>
-  </div>
-</div>
+  </nav>
 
-      <!-- Event Card 1 -->
-      <div class="group relative flex flex-col rounded-xl overflow-hidden bg-gray-800/50 hover:bg-gray-800/70 border border-gray-700/50 hover:border-primary/30 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1" itemscope itemtype="https://schema.org/SportsEvent">
-        <div class="relative aspect-video overflow-hidden">
-          <img 
-            src="https://origin-staticv2.sonyliv.com/videoasset_images/manage_file/1000003929/1749235853641308_UNL_Final_Portugal_vs_Spain_Promo_Landscape_thumb.jpg" 
-            alt="Portugal Vs Spain" 
-            class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105" 
-            loading="lazy" 
-            itemprop="image"
-          >
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-          
-          <div class="absolute top-3 left-3 flex space-x-2">
-            <span class="bg-red-600 text-white text-xs font-bold px-2.5 py-1 rounded-full animate-pulse">
-              LIVE
-            </span>
-            <span class="bg-gray-900/80 text-white text-xs font-medium px-2.5 py-1 rounded-full">
-              ENG
-            </span>
-          </div>
-          
-          <div class="absolute bottom-3 left-3 right-3 flex justify-between items-end">
-            <span class="text-xs font-medium text-white/90 bg-black/40 px-2 py-1 rounded">
-              <span class="text-red-400">●</span> Final
-            </span>
-            <span class="text-xs font-medium text-white/90 bg-black/40 px-2 py-1 rounded">
-              Sony Sports Ten 5
-            </span>
-          </div>
-        </div>
-
-        <div class="flex-1 flex flex-col p-4 space-y-3">
-          <div>
-            <h2 class="text-lg font-bold leading-tight line-clamp-2" itemprop="name">
-              Portugal Vs Spain
-            </h2>
-            <p class="text-sm text-gray-400 mt-1" itemprop="description">
-              Uefa Nations League - Final
-            </p>
-          </div>
-          
-          <div class="flex items-center text-xs text-gray-500 space-x-2">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-            <span itemprop="location">Allianz Arena</span>
-          </div>
-          
-          <a 
-            href="match khatam bhag yaha se" 
-            class="mt-2 w-full inline-flex items-center justify-center bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-white font-medium py-2.5 rounded-lg text-sm transition-all duration-300 group-hover:shadow-lg"
-            itemprop="url"
-          >
-            Watch Now
-            <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-            </svg>
-          </a>
-        </div>
-      </div>
-
-    
-      <!-- Event Card 2 -->
-          <div class="group relative flex flex-col rounded-xl overflow-hidden bg-gray-800/50 hover:bg-gray-800/70 border border-gray-700/50 hover:border-primary/30 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1" itemscope itemtype="https://schema.org/SportsEvent">
-        <div class="relative aspect-video overflow-hidden">
-          <img 
-            src="https://origin-staticv2.sonyliv.com/videoasset_images/manage_file/1000003929/1749235853641308_UNL_Final_Portugal_vs_Spain_Promo_Landscape_thumb.jpg" 
-            alt="Portugal Vs Spain" 
-            class="object-cover w-full h-full transition-transform duration-500 group-hover:scale-105" 
-            loading="lazy" 
-            itemprop="image"
-          >
-          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
-          
-          <div class="absolute top-3 left-3 flex space-x-2">
-            <span class="bg-red-600 text-white text-xs font-bold px-2.5 py-1 rounded-full animate-pulse">
-              LIVE
-            </span>
-            <span class="bg-gray-900/80 text-white text-xs font-medium px-2.5 py-1 rounded-full">
-              HIN
-            </span>
-          </div>
-          
-          <div class="absolute bottom-3 left-3 right-3 flex justify-between items-end">
-            <span class="text-xs font-medium text-white/90 bg-black/40 px-2 py-1 rounded">
-              <span class="text-red-400">●</span> Final
-            </span>
-            <span class="text-xs font-medium text-white/90 bg-black/40 px-2 py-1 rounded">
-              Sony Sports Ten 5
-            </span>
-          </div>
-        </div>
-
-        <div class="flex-1 flex flex-col p-4 space-y-3">
-          <div>
-            <h2 class="text-lg font-bold leading-tight line-clamp-2" itemprop="name">
-              Portugal Vs Spain
-            </h2>
-            <p class="text-sm text-gray-400 mt-1" itemprop="description">
-              Uefa Nations League - Final
-            </p>
-          </div>
-          
-          <div class="flex items-center text-xs text-gray-500 space-x-2">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-            </svg>
-            <span itemprop="location">Allianz Arena</span>
-          </div>
-          
-          <a 
-            href="match khatam" 
-            class="mt-2 w-full inline-flex items-center justify-center bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-white font-medium py-2.5 rounded-lg text-sm transition-all duration-300 group-hover:shadow-lg"
-            itemprop="url"
-          >
-            Watch Now
-            <svg xmlns="http://www.w3.org/2000/svg" class="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
-            </svg>
-          </a>
-        </div>
-      </div>
-
-
-    
-
-    
-    
-
-   </div>
-
-
-
-
-    <footer class="mt-16 text-center text-gray-500 text-sm">
-      <p>© 2025 @matcheslinks Sports Streaming. All rights reserved.</p>
-      <div class="mt-2 flex justify-center space-x-4">
-        <a href="#" class="hover:text-gray-300 transition-colors">Terms</a>
-        <a href="#" class="hover:text-gray-300 transition-colors">Privacy</a>
-        <a href="#" class="hover:text-gray-300 transition-colors">Help</a>
-      </div>
-    </footer>
-
+  <main class="container mx-auto px-4 py-8" id="matches-container">
+    <!-- Matches will be injected here -->
   </main>
 
-<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"rayId":"9485d583d874a093","version":"2025.5.0","r":1,"token":"443afb7c1f6846a398db1db4a6718dae","serverTiming":{"name":{"cfExtPri":true,"cfEdge":true,"cfOrigin":true,"cfL4":true,"cfSpeedBrain":true,"cfCacheStatus":true}}}' crossorigin="anonymous"></script>
+  <button id="backToTop" class="fixed bottom-8 right-8 w-12 h-12 bg-blue-600/80 hover:bg-blue-700 text-white rounded-full shadow-lg backdrop-blur-sm transition-all opacity-0 invisible" aria-label="Back to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
+
+  <script>
+    if (window.top !== window.self) {
+    window.addEventListener('DOMContentLoaded', function() {
+      document.body.innerHTML = '<div id="message">Ab to copy mat kar chutiye</div>';
+    });
+  }
+    const container = document.getElementById('matches-container');
+
+    fetch('https://raw.githubusercontent.com/drmlive/sliv-live-events/main/sonyliv.json')
+      .then(response => response.json())
+      .then(data => {
+        if (!data.matches || data.matches.length === 0) {
+          container.innerHTML = `
+            <div class="text-center py-20 space-y-4">
+              <div class="text-6xl text-gray-500"><i class="fas fa-frown"></i></div>
+              <h2 class="text-2xl text-gray-300">No matches available</h2>
+              <p class="text-gray-500">Please check back later</p>
+            </div>`;
+          return;
+        }
+
+        const cards = data.matches.map(match => `
+  <article class="match-card rounded-xl overflow-hidden relative ${match.isLive ? 'live-border' : ''}">
+    <div class="relative aspect-video">
+      <img src="${match.src}" alt="${match.event_name}" class="w-full h-full object-cover" loading="lazy">
+    </div>
+    <div class="p-4 space-y-3">
+      <div class="flex flex-wrap gap-2">
+        ${match.isLive ? `
+          <span class="px-3 py-1 bg-red-600 text-white text-xs rounded-full flex items-center space-x-1.5">
+            <span class="live-pulse w-2 h-2 bg-white rounded-full"></span>
+            <span>LIVE</span>
+          </span>` : ''}
+        <span class="px-3 py-1 bg-gray-800 text-gray-300 text-xs rounded-full">${match.event_category}</span>
+        <span class="px-3 py-1 bg-gray-800 text-gray-300 text-xs rounded-full">${match.audioLanguageName}</span>
+      </div>
+      <div class="space-y-2">
+        <h2 class="text-xl font-bold text-gray-100 truncate">${match.event_name}</h2>
+        <p class="text-sm text-gray-400">${match.match_name}</p>
+        <div class="flex items-center text-sm text-gray-400 space-x-2">
+          <i class="fas fa-tv"></i>
+          <span>${match.broadcast_channel}</span>
+        </div>
+      </div>
+      <div class="pt-4">
+        ${match.isLive ? `
+          <a href="/play.html?id=${match.contentId}" class="w-full flex items-center justify-center space-x-2 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 py-3 rounded-lg font-medium transition-all transform hover:scale-[1.02]">
+  <i class="fas fa-play"></i><span>Watch Live</span>
+</a>` : `
+          <div class="relative group">
+            <button class="w-full flex items-center justify-center space-x-2 bg-gray-700/50 text-gray-400 px-6 py-3 rounded-lg font-medium cursor-not-allowed" disabled>
+              <i class="far fa-clock"></i><span>Event Not Started</span>
+            </button>
+            <div class="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity backdrop-blur-sm"></div>
+          </div>`}
+      </div>
+    </div>
+  </article>
+`).join('');
+
+
+        container.innerHTML = `<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">${cards}</div>`;
+      })
+      .catch(err => {
+        console.error('Failed to fetch match data:', err);
+        container.innerHTML = `
+          <div class="text-center py-20 space-y-4">
+            <div class="text-6xl text-gray-500"><i class="fas fa-exclamation-triangle"></i></div>
+            <h2 class="text-2xl text-gray-300">Error loading data</h2>
+            <p class="text-gray-500">Please try again later</p>
+          </div>`;
+      });
+
+    // Back to Top Button
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTop.classList.remove('opacity-0', 'invisible');
+        backToTop.classList.add('opacity-100', 'visible');
+      } else {
+        backToTop.classList.remove('opacity-100', 'visible');
+        backToTop.classList.add('opacity-0', 'invisible');
+      }
+    });
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
 </body>
 </html>
