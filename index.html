@@ -206,7 +206,7 @@
       // Set up HLS.js if needed
       if (Hls.isSupported()) {
         const hls = new Hls();
-        hls.loadSource(`${https://sonylive.pages.dev/play?id=}${contentId}`);
+        hls.loadSource(`${PLAYER_BASE_URL}${contentId}`);
         hls.attachMedia(videoElement);
         hls.on(Hls.Events.MANIFEST_PARSED, function() {
           videoElement.play();
