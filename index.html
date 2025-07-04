@@ -1,241 +1,229 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SonyLiv Stream Mirror</title>
-  <link href="https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.css" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #121212;
-      color: white;
-      margin: 0;
-      padding: 20px;
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Watch Match</title>
+<style>
+  #message, .telegram-toggle {
+    color: #fff;
+    align-items: center;
+    z-index: 1001;
+    display: flex;
+    position: fixed;
+  }
+  .popup a, .telegram-toggle, .tg-banner {
+    text-decoration: none;
+  }
+  body {
+    margin: 0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #f4f4f4;
+    overflow: hidden;
+  }
+  .jwplayer {
+    position: absolute !important;
+  }
+  .jwplayer.jw-flag-aspect-mode {
+    min-height: 100%;
+    max-height: 100%;
+  }
+  .telegram-toggle {
+    top: 10px;
+    right: 10px;
+    background-color: #08c;
+    padding: 10px 15px;
+    border-radius: 50px;
+    font-weight: 700;
+  }
+  .telegram-toggle img {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+  }
+  #message {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,.8);
+    justify-content: center;
+    font-size: 24px;
+  }
+  .popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background-color: #1c1c1c;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(255,255,255,.2);
+    z-index: 1002;
+    width: 90%;
+    max-width: 400px;
+    animation: .5s fadeIn;
+  }
+  .popup h2 {
+    color: #fc0;
+    margin-bottom: 10px;
+    font-size: 20px;
+  }
+  .popup p {
+    margin-bottom: 20px;
+    color: #ccc;
+    font-size: 16px;
+  }
+  .popup button {
+    background-color: #08c;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color .3s;
+    margin-bottom: 10px;
+    width: 100%;
+  }
+  .popup button:hover {
+    background-color: #069;
+  }
+  .popup .close-btn {
+    background-color: #555;
+  }
+  .popup .close-btn:hover {
+    background-color: #333;
+  }
+  .popup a {
+    color: #fc0;
+  }
+  @keyframes fadeIn {
+    from {opacity:0;}
+    to {opacity:1;}
+  }
+  @media (max-width:600px){
+    .popup {
+      width: 90%;
     }
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
+    .popup h2 {
+      font-size: 18px;
     }
-    .header {
-      text-align: center;
-      margin-bottom: 30px;
-      padding-bottom: 20px;
-      border-bottom: 1px solid #333;
-    }
-    .event-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 20px;
-    }
-    .event-card {
-      background: #1e1e1e;
-      border-radius: 8px;
-      overflow: hidden;
-      transition: transform 0.3s;
-    }
-    .event-card:hover {
-      transform: translateY(-5px);
-    }
-    .event-thumbnail {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-    }
-    .event-info {
-      padding: 15px;
-    }
-    .event-title {
-      font-weight: bold;
-      margin-bottom: 5px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .event-meta {
+    .popup p {
       font-size: 14px;
-      color: #aaa;
-      margin-bottom: 10px;
     }
-    .watch-btn {
-      display: block;
-      background: #2563eb;
-      color: white;
-      text-align: center;
-      padding: 8px;
-      border-radius: 4px;
-      text-decoration: none;
-      font-weight: bold;
-      transition: background 0.3s;
+    .popup button {
+      padding: 10px;
     }
-    .watch-btn:hover {
-      background: #1d4ed8;
-    }
-    .live-badge {
-      background: #dc2626;
-      color: white;
-      padding: 3px 8px;
-      border-radius: 4px;
-      font-size: 12px;
-      font-weight: bold;
-      display: inline-block;
-      margin-bottom: 10px;
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0% { opacity: 1; }
-      50% { opacity: 0.7; }
-      100% { opacity: 1; }
-    }
-    #player-container {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0,0,0,0.9);
-      z-index: 1000;
-      display: none;
-      justify-content: center;
-      align-items: center;
-    }
-    .close-player {
-      position: absolute;
-      top: 20px;
-      right: 20px;
-      background: #333;
-      color: white;
-      border: none;
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      font-size: 20px;
-      cursor: pointer;
-      z-index: 1001;
-    }
-  </style>
+  }
+  .tg-banner {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: linear-gradient(135deg,#1da1f2,#0077b5);
+    border-radius: 8px;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(0,0,0,.3);
+    z-index: 1000;
+    transition: transform .3s, box-shadow .3s;
+  }
+  .tg-banner:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 15px rgba(0,0,0,.4);
+  }
+  .tg-banner img {
+    width: 24px;
+    height: 24px;
+    margin-right: 8px;
+    border-radius: 50%;
+    border: 1px solid #fff;
+  }
+  .tg-banner span {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: .3px;
+  }
+  .join-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+  }
+  .join-button:hover {
+    background-color: #0056b3;
+  }
+</style>
+<script src="https://content.jwplatform.com/libraries/SAHhwvZq.js"></script>
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <h1>SonyLiv Stream Mirror</h1>
-      <p>Live events automatically synced from source</p>
-    </div>
+<div id="content">
+  Loading...
+</div>
 
-    <div class="event-grid" id="events-container">
-      <!-- Events will be loaded here -->
-      <div class="loading">Loading events...</div>
-    </div>
+<script>
+  if (window.top !== window.self) {
+    window.addEventListener('DOMContentLoaded', function() {
+      document.body.innerHTML = '<div id="message">Ab to copy mat kar chutiye</div>';
+    });
+  }
 
-    <div id="player-container">
-      <button class="close-player" onclick="closePlayer()">×</button>
-      <video id="player" controls></video>
-    </div>
-  </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/plyr@3.7.8/dist/plyr.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/hls.js@1.4.0/dist/hls.min.js"></script>
-  <script>
-    // Configuration
-    const SOURCE_JSON_URL = 'https://raw.githubusercontent.com/drmlive/sliv-live-events/main/sonyliv.json';
-    const PLAYER_BASE_URL = 'https://sonylive.pages.dev/play?id=';
-    
-    // Initialize Plyr player
-    const player = new Plyr('#player');
-    
-    // Fetch events from GitHub JSON
-    async function fetchEvents() {
-      try {
-        const response = await fetch(SOURCE_JSON_URL);
-        const data = await response.json();
-        
-        if (!data.matches || data.matches.length === 0) {
-          document.getElementById('events-container').innerHTML = 
-            '<div class="no-events">No live events currently available</div>';
-          return;
-        }
-        
-        renderEvents(data.matches);
-      } catch (error) {
-        console.error('Error fetching events:', error);
-        document.getElementById('events-container').innerHTML = 
-          '<div class="error">Failed to load events. Please try again later.</div>';
+
+
+  // Clear loading
+  document.getElementById('content').innerHTML = '<div id="jwplayerDiv"></div>';
+
+  // This will override Akamai URLs with proxy if needed
+  (function interceptNetworkRequests() {
+    const originalOpen = XMLHttpRequest.prototype.open;
+    XMLHttpRequest.prototype.open = function(method, url) {
+      if (url.includes('sonydaimenew.akamaized.net')) {
+        url = url.replace('sonydaimenew.akamaized.net', 'greenyellow-ape-610838.hostingersite.com/event.php');
+      } else if (url.includes('sonypartnersdaimenew.akamaized.net')) {
+        url = url.replace('sonypartnersdaimenew.akamaized.net', 'greenyellow-ape-610838.hostingersite.com/event.php');
       }
+      return originalOpen.apply(this, arguments);
+    };
+  })();
+
+  // Initialize JWPlayer directly with your provided stream
+  window.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('content').innerHTML = '<div id="jwplayerDiv"></div>';
+
+    jwplayer("jwplayerDiv").setup({
+      playlist: [{
+        title: "Live Match",
+        description: "You're Watching",
+        sources: [{
+          file: "https://sonydaimenew.akamaized.net/hls/live/2037143/DAI23ME-V3/master_mdh.m3u8?hdnea=exp=1751653928~acl=/*~id=93085259747622485185959303147033~hmac=807fcb1f115441b8eee5ef233450462530bea928c47b788195b4bf3c2f697b74",
+          type: "hls",
+          label: "1080p",
+          default: true
+        }]
+      }],
+      width: "100%",
+      height: "100%",
+      autostart: true,
+      controls: true
+    });
+  });
+
+// Popup confirm on load - outside async IIFE for better timing
+window.addEventListener("load", function() {
+  setTimeout(() => {
+    if (confirm("Join @thecricsters for more updates?")) {
+      window.location.href = "https://t.me/+P6IPpHAJ-oZjNDY1";
     }
-    
-    // Render events to the page
-    function renderEvents(matches) {
-      const container = document.getElementById('events-container');
-      container.innerHTML = '';
-      
-      matches.forEach(match => {
-        if (!match.isLive) return; // Only show live events
-        
-        const eventCard = document.createElement('div');
-        eventCard.className = 'event-card';
-        
-        eventCard.innerHTML = `
-          <img src="${match.src}" alt="${match.event_name}" class="event-thumbnail">
-          <div class="event-info">
-            <div class="live-badge">LIVE</div>
-            <div class="event-title">${match.event_name}</div>
-            <div class="event-meta">${match.match_name}</div>
-            <div class="event-meta">${match.broadcast_channel}</div>
-            <a href="#" class="watch-btn" data-id="${match.contentId}">Watch Now</a>
-          </div>
-        `;
-        
-        container.appendChild(eventCard);
-      });
-      
-      // Add click handlers to all watch buttons
-      document.querySelectorAll('.watch-btn').forEach(btn => {
-        btn.addEventListener('click', function(e) {
-          e.preventDefault();
-          const contentId = this.getAttribute('data-id');
-          openPlayer(contentId);
-        });
-      });
-    }
-    
-    // Open player with specific content
-    function openPlayer(contentId) {
-      const playerContainer = document.getElementById('player-container');
-      const videoElement = document.getElementById('player');
-      
-      // Set up HLS.js if needed
-      if (Hls.isSupported()) {
-        const hls = new Hls();
-        hls.loadSource(`${PLAYER_BASE_URL}${contentId}`);
-        hls.attachMedia(videoElement);
-        hls.on(Hls.Events.MANIFEST_PARSED, function() {
-          videoElement.play();
-        });
-      } else if (videoElement.canPlayType('application/vnd.apple.mpegurl')) {
-        // For Safari
-        videoElement.src = `${PLAYER_BASE_URL}${contentId}`;
-        videoElement.addEventListener('loadedmetadata', function() {
-          videoElement.play();
-        });
-      }
-      
-      playerContainer.style.display = 'flex';
-      document.body.style.overflow = 'hidden';
-    }
-    
-    // Close the player
-    function closePlayer() {
-      const playerContainer = document.getElementById('player-container');
-      const videoElement = document.getElementById('player');
-      
-      videoElement.pause();
-      videoElement.src = '';
-      playerContainer.style.display = 'none';
-      document.body.style.overflow = 'auto';
-    }
-    
-    // Initialize the page
-    document.addEventListener('DOMContentLoaded', fetchEvents);
-  </script>
+  }, 500);
+});
+</script>
 </body>
 </html>
